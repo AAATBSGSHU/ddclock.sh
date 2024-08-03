@@ -32,6 +32,9 @@ format_time_difference() {
 draw_clock() {
     local doomsday="$1"
     
+    tput civis
+    trap 'tput cnorm; exit' SIGINT SIGTERM EXIT
+    
     while true; do
         local difference=$(calculate_time_difference "$doomsday")
         
@@ -48,6 +51,8 @@ draw_clock() {
         
         sleep 1
     done
+    
+    tput cnorm
 }
 
 main() {
@@ -62,4 +67,3 @@ main() {
 }
 
 main
-
