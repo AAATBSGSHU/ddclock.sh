@@ -34,11 +34,14 @@ draw_clock() {
     
     tput civis
     trap 'tput cnorm; exit' SIGINT SIGTERM EXIT
+    trap 'draw_clock "$doomsday"' SIGWINCH
     
     while true; do
         local difference=$(calculate_time_difference "$doomsday")
         
         if [ "$difference" -le 0 ]; then
+            clear
+            tput cup $(($(tput lines) / 2)) $(($(tput cols) / 2 - 6))
             echo "000:00:00:00"
             break
         fi
