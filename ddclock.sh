@@ -1,13 +1,6 @@
 #!/bin/bash
 
-CONFIG_DIR="$HOME/.config/AAATBSGSHU/ddclock" # feel free to change
-CONFIG_FILE="$CONFIG_DIR/doomsday.txt"
-
-ensure_config_dir() {
-    if [ ! -d "$CONFIG_DIR" ]; then
-        mkdir -p "$CONFIG_DIR"
-    fi
-}
+CONFIG_FILE="doomsday_config.txt"
 
 save_doomsday_date() {
     echo "$1" > "$CONFIG_FILE"
@@ -66,8 +59,6 @@ draw_clock() {
 }
 
 main() {
-    ensure_config_dir
-
     local doomsday=$(load_doomsday_date)
 
     if [ -z "$doomsday" ]; then
